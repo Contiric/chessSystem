@@ -36,5 +36,12 @@ public class Board {
 		return pieces[position.getRow()][position.getColumn()];
 	}
 	
+	// Método responsável por colocar a peça no tabuleiro
+	public void placePiece (Piece piece, Position position) {
+		// Pegando a matriz de peças na posição dada e atribuindo a ela a peça que foi informada
+		pieces[position.getRow()][position.getColumn()] = piece;
+		// Informando que a peça não está mais na posição nula
+		piece.position = position;
+	}
 
 }
