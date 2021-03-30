@@ -67,8 +67,29 @@ public class Board {
 		// Informando que a peça não está mais na posição nula
 		piece.position = position;
 	}
-
-	 
+	
+	/**
+	 * Método para retirar a peça do tabuleiro
+	 */
+	 public  Piece removePiece(Position position) {
+		 //Caso a posição não existe, uma exceção vai ser acionada
+		 if (!positionExists(position)) {
+			 throw new BoardException("Position not found on the board");
+		 }
+		 //Verificando se existe alguma peça nessa posição. Caso negativo vai retornar nulo.
+		 if (piece(position) == null) {
+			 return null;
+		 }
+		 
+		 // Para retirar a peça utilizei uma variável auxiliar onde ela recebe a posição da peça. 
+		 // Depois disso eu vou dizer que está peça é nula. Ou seja, foi retirada do tabuleiro.
+		 // Após isso, a posição na matriz de peças será nulo, indicando que não tem mais peças naquela posição.
+		 // Por fim, meu método vai retornar o aux que contém a peça retirada.
+		 Piece aux = piece(position);
+		 aux.position = null;
+		 pieces[position.getRow()][position.getColumn()] = null;
+		 return aux;
+	 }
 	
 	/**
 	 * Método para verificar se a posição existe através das linhas e colunas

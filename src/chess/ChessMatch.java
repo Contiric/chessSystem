@@ -1,6 +1,7 @@
 package chess;
 
 import boardGame.Board;
+import boardGame.Piece;
 import boardGame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
@@ -26,11 +27,44 @@ public class ChessMatch {
 		return mat;
 	}
 	
+	//Operação para retirar a peça do lugar de origem e colocar na posição de destino
+	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+		Position source = sourcePosition.toPosition();
+		Position target = targetPosition.toPosition();
+		
+		// Validar posição de origem, se ela não existir vai lançar uma mensagem de exceção
+		validateSourcePosition(source);
+		
+		//Operação responsável por realizar o movimento da peça
+		Piece capturedPiece = makeMove(source, target);
+		return (ChessPiece) capturedPiece;
+ 	}
+	
+	//
+	private Piece makeMove(Position source, Position target) {
+		// Retirou a peça da origem 
+		Piece p = board.removePiece(source);
+		//Remover a possível peça que esteja na posição de destino
+		Piece capturedPiece = board.removePiece(target);
+		//Colocar a posição de origem na de destino
+		board.placePiece(p, target);
+		return capturedPiece;
+	}
+	
+	// Se não tive uma peça nessa posição vai ser lançada uma exceção
+	private void validateSourcePosition(Position position) {
+		if (!board.thereIsAPiece(position)) {
+			throw new ChessException("There is no piece on source position");	
+		}
+	}
+	
+	// Operação de colocar a peça passando uma posição nas coordernadas do xadrez
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
 	}
 	
 	// Método responsável por colocar as peças no tabuleiro
+	// Passar as posições do xadrez
 	public void initialSetup() {
 		placeNewPiece('c', 1, new Rook(board, Color.WHITE));
         placeNewPiece('c', 2, new Rook(board, Color.WHITE));
