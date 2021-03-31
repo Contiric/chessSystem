@@ -51,11 +51,24 @@ public class UI {
 		}
 	}
 	
+	//Caso não tenha como locomover a peça o método vai retornar falso
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pieces.length; j++) {
-				printPiece(pieces[i][j]);
+				printPiece(pieces[i][j], false);
+			}
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h");
+	}
+	
+	// Mesmo método de acima, porém incluindo as possíveis mexidas como argumento. Caso tenha como locomover a peça o método retornará as posições possíveis
+	public static void printBoard(ChessPiece[][] pieces, boolean [][] possibleMoves) {
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print((8 - i) + " ");
+			for (int j = 0; j < pieces.length; j++) {
+				printPiece(pieces[i][j], possibleMoves[i][j]);
 			}
 			System.out.println();
 		}
@@ -63,9 +76,13 @@ public class UI {
 	}
 	
 	// Método para imprimir a peça
-	private static void printPiece(ChessPiece piece) {
+	// Alteração no método ao incluir o background, que significa o plano de fundo das posições possíveis
+	private static void printPiece(ChessPiece piece, boolean background) {
+		if (background) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
     	if (piece == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         }
     		else {
     			

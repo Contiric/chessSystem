@@ -17,7 +17,7 @@ public class King extends ChessPiece {
 	}
 	
 	@Override
-	//Criamos uma matriz de booleanos da mesma dimensão do tabuleiro
+	//Criamos uma matriz de booleanos da mesma dimensão do tabuleiro para as possíveis trocas de posições
 	public boolean [][] possibleMoves() {
 		boolean [][] mat = new boolean [getBoard().getRows()][getBoard().getColumns()];
 		return null;
