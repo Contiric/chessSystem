@@ -2,6 +2,7 @@ package chess;
 
 import boardGame.Board;
 import boardGame.Piece;
+import boardGame.Position;
 
 public abstract class ChessPiece extends Piece {
 	
@@ -15,7 +16,12 @@ public abstract class ChessPiece extends Piece {
 	public Color getColor() {
 		return color;
 	}
-
+	
+	//Operação para verificar se existe uma peça adversária. O método está protected para somente dar acesso as sublaclasse King, Rook,  etc..
+	protected boolean isThereOpponentPiece (Position position) {
+		ChessPiece p = (ChessPiece) getBoard().piece(position);
+		return p != null && p.getColor() != color; 
+	}
 	
 	
 
