@@ -3,6 +3,7 @@ package application;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
@@ -51,6 +52,14 @@ public class UI {
 		}
 	}
 	
+	//Imprimir a partida
+	public static void printMatch(ChessMatch chessMatch) {
+		printBoard(chessMatch.getpieces());
+		System.out.println();
+		System.out.println("Turn:" + chessMatch.getTurn());
+		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+	}
+	
 	//Caso não tenha como locomover a peça o método vai retornar falso
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
@@ -62,6 +71,8 @@ public class UI {
 		}
 		System.out.println("  a b c d e f g h");
 	}
+	
+	
 	
 	// Mesmo método de acima, porém incluindo as possíveis mexidas como argumento. Caso tenha como locomover a peça o método retornará as posições possíveis
 	public static void printBoard(ChessPiece[][] pieces, boolean [][] possibleMoves) {
