@@ -17,6 +17,11 @@ public abstract class ChessPiece extends Piece {
 		return color;
 	}
 	
+	//Coverter matriz para xadrez
+	public ChessPosition getChessPosition() {
+		return ChessPosition.fromPosition(position);
+	}
+	
 	//Operação para verificar se existe uma peça adversária. O método está protected para somente dar acesso as sublaclasse King, Rook,  etc..
 	protected boolean isThereOpponentPiece (Position position) {
 		ChessPiece p = (ChessPiece) getBoard().piece(position);
