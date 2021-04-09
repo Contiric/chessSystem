@@ -19,7 +19,7 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 		List<ChessPiece> captured = new ArrayList<>();
 		
-		
+		// Caso aconteça o xeque mate, o programa automaticamente vai ser finalizado informando o vencedor.
 		while (!chessMatch.getcheckMate()) {
 			try {
 				UI.clearScreen();
